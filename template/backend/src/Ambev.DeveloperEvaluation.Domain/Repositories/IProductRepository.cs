@@ -13,6 +13,14 @@ public interface IProductRepository
     Task<Product> CreateAsync(Product product, CancellationToken cancellationToken = default);
     
     /// <summary>
+    /// Retrieves a product by their unique identifier
+    /// </summary>
+    /// <param name="id">The unique identifier of the product</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The user if found, null otherwise</returns>
+    Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    
+    /// <summary>
     /// Retrieves a product by their title.
     /// </summary>
     /// <param name="title">The title to search for</param>

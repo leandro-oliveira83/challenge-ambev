@@ -21,6 +21,17 @@ public class ProductRepository: IProductRepository
     }
     
     /// <summary>
+    /// Retrieves a product by their unique identifier
+    /// </summary>
+    /// <param name="id">The unique identifier of the product</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The user if found, null otherwise</returns>
+    public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await _context.Products.FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
+    }
+    
+    /// <summary>
     /// Creates a new product in the database
     /// </summary>
     /// <param name="product">The product to create</param>
