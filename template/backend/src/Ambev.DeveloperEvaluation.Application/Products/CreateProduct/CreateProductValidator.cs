@@ -1,18 +1,17 @@
 using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
+namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 
 /// <summary>
-/// Validator for CreateProductRequest that defines validation rules for product creation.
+/// Validator for CreateProductCommandValidator that defines validation rules for product creating command.
 /// </summary>
-public class CreateProductRequestValidator : AbstractValidator<CreateProductRequest>
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
     /// <summary>
-    /// Initializes a new instance of the CreateProductRequestValidator with defined validation rules.
+    /// Initializes a new instance of the CreateProductCommandValidator with defined validation rules.
     /// </summary>
     /// <remarks>
     /// Validation rules include:
-    /// The validation includes checking:
     /// - Title: Required, must be between 3 and 100 characters
     /// - Description: Required, must be between 3 and 300 characters
     /// - Category: Required, must be between 3 and 100 characters
@@ -20,7 +19,7 @@ public class CreateProductRequestValidator : AbstractValidator<CreateProductRequ
     /// - Image: Required, must be between 3 and 100 characters
     /// - Rating: Required, must be not null
     /// </remarks>
-    public CreateProductRequestValidator()
+    public CreateProductCommandValidator()
     {
         RuleFor(product => product.Title).NotEmpty().Length(3, 100);
         RuleFor(product => product.Description).NotEmpty().Length(3, 300);

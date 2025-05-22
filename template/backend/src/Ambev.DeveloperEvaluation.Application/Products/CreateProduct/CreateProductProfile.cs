@@ -9,7 +9,7 @@ namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 public class CreateProductProfile: Profile
 {
     /// <summary>
-    /// Initializes the mappings for CreateUser operation
+    /// Initializes the mappings for CreateProduct operation
     /// </summary>
     public CreateProductProfile()
     {

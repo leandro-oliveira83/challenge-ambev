@@ -24,17 +24,6 @@ public class ProductRepository: IProductRepository
     }
     
     /// <summary>
-    /// Retrieves a product by their unique identifier
-    /// </summary>
-    /// <param name="id">The unique identifier of the product</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The user if found, null otherwise</returns>
-    public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
-    {
-        return await _context.Products.FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
-    }
-    
-    /// <summary>
     /// Creates a new product in the database
     /// </summary>
     /// <param name="product">The product to create</param>
@@ -45,6 +34,30 @@ public class ProductRepository: IProductRepository
         await _context.Products.AddAsync(product, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
         return product;
+    }
+    
+    /// <summary>
+    /// Updates an existing product in the repository
+    /// </summary>
+    /// <param name="product">The product to update</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The updated product</returns>
+    public async Task<Product> UpdateAsync(Product product, CancellationToken cancellationToken = default)
+    {
+        _context.Products.Update(product);
+        await _context.SaveChangesAsync(cancellationToken);
+        return product;
+    }
+    
+    /// <summary>
+    /// Retrieves a product by their unique identifier
+    /// </summary>
+    /// <param name="id">The unique identifier of the product</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The user if found, null otherwise</returns>
+    public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await _context.Products.FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
     }
     
     /// <summary>

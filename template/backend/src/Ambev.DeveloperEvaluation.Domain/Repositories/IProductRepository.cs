@@ -14,6 +14,14 @@ public interface IProductRepository
     Task<Product> CreateAsync(Product product, CancellationToken cancellationToken = default);
     
     /// <summary>
+    /// Updates an existing product in the repository
+    /// </summary>
+    /// <param name="product">The product to update</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The updated sale</returns>
+    Task<Product> UpdateAsync(Product product, CancellationToken cancellationToken = default);
+    
+    /// <summary>
     /// Retrieves a product by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the product</param>

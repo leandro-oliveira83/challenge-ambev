@@ -1,20 +1,20 @@
 using Ambev.DeveloperEvaluation.Domain.ValueObjects;
 
-namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
+namespace Ambev.DeveloperEvaluation.Application.Products.UpdateProduct;
 
 /// <summary>
-/// Represents the response returned after successfully creating a new product.
+/// Represents the response returned after successfully updated product.
 /// </summary>
 /// <remarks>
-/// This response contains the unique identifier of the newly created product,
+/// This response contains the unique identifier of the updated product,
 /// which can be used for subsequent operations or reference.
 /// </remarks>
-public class CreateProductResult
+public class UpdateProductResult
 {
     /// <summary>
-    /// Gets or sets the unique identifier of the newly created product.
+    /// Gets or sets the unique identifier of the updated product.
     /// </summary>
-    /// <value>A GUID that uniquely identifies the created product in the system.</value>
+    /// <value>A GUID that uniquely identifies the updated product in the system.</value>
     public Guid Id { get; set; }
 
     /// <summary>
@@ -46,5 +46,4 @@ public class CreateProductResult
     /// Gets or sets the product's rating.
     /// </summary>
     public Rating Rating { get; set; } = default!;
-
 }
