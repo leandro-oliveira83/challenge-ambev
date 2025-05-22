@@ -1,3 +1,6 @@
+using Ambev.DeveloperEvaluation.Common.Enums;
+using Ambev.DeveloperEvaluation.Common.Extensions;
+using Ambev.DeveloperEvaluation.Common.Results;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -71,5 +74,25 @@ public class ProductRepository: IProductRepository
         _context.Products.Remove(product);
         await _context.SaveChangesAsync(cancellationToken);
         return true;
+    }
+    
+    /// <summary>
+    /// Retrieves all paginated products.
+    /// </summary>
+    /// <param name="paging">Info to paginate</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The list of paginated products</returns>
+    public async Task<PaginationQueryResult<Product>> GetAllPagedAsync(
+        PaginationQuery paging,
+        CancellationToken cancellationToken = default)
+    {
+        return await _context.Products
+            .AsNoTracking()
+            .ApplyPaginationAsync(
+                page: paging.Page,
+                pageSize: paging.Size,
+                orderBy: p => p.Title,
+                direction: SortDirection.Asc,
+                cancellationToken: cancellationToken);
     }
 }

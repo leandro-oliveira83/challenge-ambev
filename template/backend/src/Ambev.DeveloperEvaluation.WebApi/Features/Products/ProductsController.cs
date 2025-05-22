@@ -5,9 +5,11 @@ using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct;
+using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetAllProduct;
 using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 using Ambev.DeveloperEvaluation.Application.Products.GetProduct;
 using Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
+using Ambev.DeveloperEvaluation.Application.Products.GetAllProduct;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products;
 
@@ -88,6 +90,30 @@ public class ProductsController : BaseController
             Message = "Product retrieved successfully",
             Data = _mapper.Map<GetProductResponse>(response)
         });
+    }
+    
+    
+    /// <summary>
+    /// Retrieve a list of all products.
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>Paginated list of products</returns>
+    [HttpGet]
+    [ProducesResponseType(typeof(PaginatedResponse<ProductResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductRequest request, CancellationToken cancellationToken)
+    {
+        var command = _mapper.Map<GetAllProductCommand>(request);
+        var response = await _mediator.Send(command, cancellationToken);
+        var items = _mapper.Map<ICollection<ProductResponse>>(response.Items);
+
+        return OkPaginated<ProductResponse>(
+            new(
+                items, 
+                response.TotalItems, 
+                response.CurrentPage, 
+                request.PageSize ?? 10));
     }
     
     /// <summary>
