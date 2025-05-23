@@ -19,7 +19,7 @@ public class CreateSaleProfile: Profile
             src.ProductName,
             src.Quantity,
             src.UnitPrice,
-            0 // O desconto pode ser calculado depois se preferir
+            0 
         ));
         CreateMap<SaleItem, CreateSaleItemResult>();
         CreateMap<CreateSaleCommand, Sale>()

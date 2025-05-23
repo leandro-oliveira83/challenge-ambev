@@ -1,9 +1,9 @@
-namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
+namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 
 /// <summary>
 /// Represents the result of a single item included in a sale item.
 /// </summary>
-public class CreateSaleItemResult
+public class GetSaleItemResult
 {
     /// <summary>
     /// Gets or sets the product name.

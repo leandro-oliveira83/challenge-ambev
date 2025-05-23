@@ -1,32 +1,32 @@
-namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 
 /// <summary>
-/// Represents the result of a single item included in a sale item.
+/// API model representing an item in the sale response.
 /// </summary>
-public class CreateSaleItemResult
+public class GetSaleItemResponse
 {
     /// <summary>
-    /// Gets or sets the product name.
+    /// The product name associated with this item.
     /// </summary>
     public string ProductName { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the quantity sold.
+    /// The quantity of the product sold.
     /// </summary>
     public int Quantity { get; set; }
 
     /// <summary>
-    /// Gets or sets the unit price of the item.
+    /// The price per unit of the product.
     /// </summary>
     public decimal UnitPrice { get; set; }
 
     /// <summary>
-    /// Gets or sets the discount applied to the item.
+    /// The discount applied to the item (as percentage, e.g., 0.1 for 10%).
     /// </summary>
     public decimal Discount { get; set; }
 
     /// <summary>
-    /// Gets or sets the total amount for the item (already applying discount).
+    /// The total amount charged for this item (after discount).
     /// </summary>
     public decimal Total { get; set; }
 }
