@@ -28,7 +28,7 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Create
     /// <summary>
     /// Handles the CreateProductCommand request
     /// </summary>
-    /// <param name="command">The CreateProduct command</param>
+    /// <param name="command">The CreateSale command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created user details</returns>
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
