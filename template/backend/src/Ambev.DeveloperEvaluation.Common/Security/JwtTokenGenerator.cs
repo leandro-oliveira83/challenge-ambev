@@ -25,13 +25,13 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     /// <summary>
     /// Generates a JWT token for a specific user.
     /// </summary>
-    /// <param name="user">User for whom the token will be generated.</param>
+    /// <param name="user">Users for whom the token will be generated.</param>
     /// <returns>Valid JWT token as string.</returns>
     /// <remarks>
     /// The generated token includes the following claims:
-    /// - NameIdentifier (User ID)
+    /// - NameIdentifier (Users ID)
     /// - Name (Username)
-    /// - Role (User role)
+    /// - Role (Users role)
     /// 
     /// The token is valid for 8 hours from the moment of generation.
     /// </remarks>

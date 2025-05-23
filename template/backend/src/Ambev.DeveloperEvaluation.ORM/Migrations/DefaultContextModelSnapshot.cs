@@ -22,7 +22,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.User", b =>
+            modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Users", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

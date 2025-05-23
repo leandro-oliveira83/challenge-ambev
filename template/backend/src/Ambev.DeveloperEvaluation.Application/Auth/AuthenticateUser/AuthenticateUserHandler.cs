@@ -35,7 +35,7 @@ namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
             var activeUserSpec = new ActiveUserSpecification();
             if (!activeUserSpec.IsSatisfiedBy(user))
             {
-                throw new UnauthorizedAccessException("User is not active");
+                throw new UnauthorizedAccessException("Users is not active");
             }
 
             var token = _jwtTokenGenerator.GenerateToken(user);

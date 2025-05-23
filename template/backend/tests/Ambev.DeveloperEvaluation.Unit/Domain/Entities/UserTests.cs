@@ -6,7 +6,7 @@ using Xunit;
 namespace Ambev.DeveloperEvaluation.Unit.Domain.Entities;
 
 /// <summary>
-/// Contains unit tests for the User entity class.
+/// Contains unit tests for the Users entity class.
 /// Tests cover status changes and validation scenarios.
 /// </summary>
 public class UserTests
@@ -14,7 +14,7 @@ public class UserTests
     /// <summary>
     /// Tests that when a suspended user is activated, their status changes to Active.
     /// </summary>
-    [Fact(DisplayName = "User status should change to Active when activated")]
+    [Fact(DisplayName = "Users status should change to Active when activated")]
     public void Given_SuspendedUser_When_Activated_Then_StatusShouldBeActive()
     {
         // Arrange
@@ -31,7 +31,7 @@ public class UserTests
     /// <summary>
     /// Tests that when an active user is suspended, their status changes to Suspended.
     /// </summary>
-    [Fact(DisplayName = "User status should change to Suspended when suspended")]
+    [Fact(DisplayName = "Users status should change to Suspended when suspended")]
     public void Given_ActiveUser_When_Suspended_Then_StatusShouldBeSuspended()
     {
         // Arrange

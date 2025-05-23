@@ -52,7 +52,7 @@ public class AuthController : BaseController
         return Ok(new ApiResponseWithData<AuthenticateUserResponse>
         {
             Success = true,
-            Message = "User authenticated successfully",
+            Message = "Users authenticated successfully",
             Data = _mapper.Map<AuthenticateUserResponse>(response)
         });
     }
