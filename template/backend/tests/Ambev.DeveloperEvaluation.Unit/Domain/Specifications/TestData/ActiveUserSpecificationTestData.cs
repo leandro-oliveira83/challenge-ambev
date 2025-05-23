@@ -12,14 +12,14 @@ namespace Ambev.DeveloperEvaluation.Unit.Domain.Specifications.TestData;
 public static class ActiveUserSpecificationTestData
 {
     /// <summary>
-    /// Configures the Faker to generate valid User entities.
+    /// Configures the Faker to generate valid Users entities.
     /// The generated users will have valid:
     /// - Email (valid format)
     /// - Password (meeting complexity requirements)
     /// - FirstName
     /// - LastName
     /// - Phone (Brazilian format)
-    /// - Role (User)
+    /// - Role (Users)
     /// Status is not set here as it's the main test parameter
     /// </summary>
     private static readonly Faker<User> userFaker = new Faker<User>()
@@ -33,10 +33,10 @@ public static class ActiveUserSpecificationTestData
         });
 
     /// <summary>
-    /// Generates a valid User entity with the specified status.
+    /// Generates a valid Users entity with the specified status.
     /// </summary>
     /// <param name="status">The UserStatus to set for the generated user.</param>
-    /// <returns>A valid User entity with randomly generated data and specified status.</returns>
+    /// <returns>A valid Users entity with randomly generated data and specified status.</returns>
     public static User GenerateUser(UserStatus status)
     {
         var user = userFaker.Generate();

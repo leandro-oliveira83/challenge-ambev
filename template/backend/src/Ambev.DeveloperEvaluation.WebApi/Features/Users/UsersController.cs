@@ -55,7 +55,7 @@ public class UsersController : BaseController
         return Created(string.Empty, new ApiResponseWithData<CreateUserResponse>
         {
             Success = true,
-            Message = "User created successfully",
+            Message = "Users created successfully",
             Data = _mapper.Map<CreateUserResponse>(response)
         });
     }
@@ -85,7 +85,7 @@ public class UsersController : BaseController
         return Ok(new ApiResponseWithData<GetUserResponse>
         {
             Success = true,
-            Message = "User retrieved successfully",
+            Message = "Users retrieved successfully",
             Data = _mapper.Map<GetUserResponse>(response)
         });
     }
@@ -115,7 +115,7 @@ public class UsersController : BaseController
         return Ok(new ApiResponse
         {
             Success = true,
-            Message = "User deleted successfully"
+            Message = "Users deleted successfully"
         });
     }
 }

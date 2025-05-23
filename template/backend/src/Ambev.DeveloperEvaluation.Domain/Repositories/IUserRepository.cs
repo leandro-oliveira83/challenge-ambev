@@ -3,7 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.Entities;
 namespace Ambev.DeveloperEvaluation.Domain.Repositories;
 
 /// <summary>
-/// Repository interface for User entity operations
+/// Repository interface for Users entity operations
 /// </summary>
 public interface IUserRepository
 {
