@@ -4,22 +4,22 @@ using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Messaging;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.DeleteSale;
+namespace Ambev.DeveloperEvaluation.Application.Sales.CancelSale;
 
 /// <summary>
-/// Handler for processing DeleteSaleCommand requests
+/// Handler for processing CancelSaleCommand requests
 /// </summary>
-public class DeleteSaleHandler: IRequestHandler<DeleteSaleCommand, DeleteSaleResponse>
+public class CancelSaleHandler: IRequestHandler<CancelSaleCommand, CancelSaleResponse>
 {
     private readonly ISaleRepository _saleRepository;
     private readonly IEventPublisher _publisher;
 
     /// <summary>
-    /// Initializes a new instance of DeleteSaleHandler
+    /// Initializes a new instance of CancelSaleHandler
     /// </summary>
     /// <param name="saleRepository">The sale repository</param>
     /// <param name="publisher">The EventPublisher instance</param>
-    public DeleteSaleHandler(
+    public CancelSaleHandler(
         ISaleRepository saleRepository,
         IEventPublisher publisher)
     {
@@ -28,25 +28,29 @@ public class DeleteSaleHandler: IRequestHandler<DeleteSaleCommand, DeleteSaleRes
     }
     
     /// <summary>
-    /// Handles the DeleteSaleCommand request
+    /// Handles the CancelSaleCommand request
     /// </summary>
-    /// <param name="request">The DeleteSale command</param>
+    /// <param name="request">The CancelSale command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The result of the delete operation</returns>
-    public async Task<DeleteSaleResponse> Handle(DeleteSaleCommand request, CancellationToken cancellationToken)
+    public async Task<CancelSaleResponse> Handle(CancelSaleCommand request, CancellationToken cancellationToken)
     {
-        var validator = new DeleteSaleValidator();
+        var validator = new CancelSaleValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var success = await _saleRepository.DeleteAsync(request.Id, cancellationToken);
-        if (!success)
+        var sale = await _saleRepository.GetByIdAsync(request.Id, cancellationToken);
+        if (sale is null)
             throw new KeyNotFoundException($"Sale with ID {request.Id} not found");
         
-        await _publisher.PublishAsync(new SaleDeletedEvent(request.Id), cancellationToken);
+        sale.Cancel();
+        
+        var updatedSale = await _saleRepository.UpdateAsync(sale, cancellationToken);
+        
+        await _publisher.PublishAsync(new SaleCancelledEvent(request.Id), cancellationToken);
 
-        return new DeleteSaleResponse { Success = true };
-    }
+        return new CancelSaleResponse { Success = true };
+    } 
 }
