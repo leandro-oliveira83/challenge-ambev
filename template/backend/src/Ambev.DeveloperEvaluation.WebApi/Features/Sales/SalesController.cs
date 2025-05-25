@@ -7,11 +7,13 @@ using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.Application.Sales.UpdateSale;
 using Ambev.DeveloperEvaluation.Application.Sales.DeleteSale;
 using Ambev.DeveloperEvaluation.Application.Sales.CancelSale;
+using Ambev.DeveloperEvaluation.Application.Sales.GetAllSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.UpdateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.DeleteSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CancelSale;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetAllSale;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales;
 
@@ -184,5 +186,28 @@ public class SalesController: BaseController
             Success = true,
             Message = "Sale cancelled successfully"
         });
+    }
+    
+    /// <summary>
+    /// Retrieve a list of all sales.
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>Paginated list of products</returns>
+    [HttpGet]
+    [ProducesResponseType(typeof(PaginatedResponse<GetAllSaleResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetAllSales([FromQuery] GetAllSaleRequest request, CancellationToken cancellationToken)
+    {
+        var command = _mapper.Map<GetAllSaleCommand>(request);
+        var response = await _mediator.Send(command, cancellationToken);
+        var items = _mapper.Map<ICollection<GetAllSaleResponse>>(response.Items);
+
+        return OkPaginated<GetAllSaleResponse>(
+            new(
+                items, 
+                response.TotalItems, 
+                response.CurrentPage, 
+                request.PageSize ?? 10));
     }
 }

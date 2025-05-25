@@ -1,3 +1,6 @@
+using Ambev.DeveloperEvaluation.Common.Enums;
+using Ambev.DeveloperEvaluation.Common.Extensions;
+using Ambev.DeveloperEvaluation.Common.Results;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -74,5 +77,26 @@ public class SaleRepository: ISaleRepository
         return await _context.Sales
             .Include(sale => sale.Items.Where(i => !i.IsCancelled))
             .FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
+    }
+    
+    /// <summary>
+    /// Retrieves all paginated sales.
+    /// </summary>
+    /// <param name="paging">Info to paginate</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The list of paginated sales</returns>
+    public async Task<PaginationQueryResult<Sale>> GetAllPagedAsync(
+        PaginationQuery paging,
+        CancellationToken cancellationToken = default)
+    {
+        return await _context.Sales
+            .Include(sale => sale.Items.Where(i => !i.IsCancelled))
+            .AsNoTracking()
+            .ApplyPaginationAsync(
+                page: paging.Page,
+                pageSize: paging.Size,
+                orderBy: p => p.SaleNumber,
+                direction: SortDirection.Asc,
+                cancellationToken: cancellationToken);
     }
 }

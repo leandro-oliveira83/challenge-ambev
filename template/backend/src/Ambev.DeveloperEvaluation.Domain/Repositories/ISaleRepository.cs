@@ -39,4 +39,14 @@ public interface ISaleRepository
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The user if found, null otherwise</returns>
     Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    
+    /// <summary>
+    /// Retrieves all paginated sales.
+    /// </summary>
+    /// <param name="paging">Info to paginate</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The list of paginated sales</returns>
+    Task<PaginationQueryResult<Sale>> GetAllPagedAsync(
+        PaginationQuery paging,
+        CancellationToken cancellationToken = default);
 }
