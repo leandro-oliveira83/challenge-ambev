@@ -34,6 +34,19 @@ public class SaleRepository: ISaleRepository
     }
     
     /// <summary>
+    /// Updates an existing sale in the repository
+    /// </summary>
+    /// <param name="sale">The sale to update</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The updated sale</returns>
+    public async Task<Sale> UpdateAsync(Sale sale, CancellationToken cancellationToken = default)
+    {
+        _context.Sales.Update(sale);
+        await _context.SaveChangesAsync(cancellationToken);
+        return sale;
+    }
+    
+    /// <summary>
     /// Retrieves a sale by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the sale</param>
@@ -42,7 +55,7 @@ public class SaleRepository: ISaleRepository
     public async Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _context.Sales
-            .Include(sale => sale.Items)
+            .Include(sale => sale.Items.Where(i => !i.IsCancelled))
             .FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
     }
 }

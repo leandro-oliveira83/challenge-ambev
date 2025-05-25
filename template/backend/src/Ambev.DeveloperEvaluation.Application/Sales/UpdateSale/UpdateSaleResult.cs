@@ -1,18 +1,18 @@
-namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale;
+namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale;
 
 /// <summary>
-/// Represents the response returned after successfully get a sale.
+/// Represents the response returned after successfully updating a new sale.
 /// </summary>
 /// <remarks>
-/// This response contains the unique identifier of the newly get sale,
+/// This response contains the unique identifier of the updating sale,
 /// as well as metadata such as customer, branch, and total value of the sale.
 /// </remarks>
-public class GetSaleResult
+public class UpdateSaleResult
 {
     /// <summary>
-    /// Gets or sets the unique identifier of the get a sale.
+    /// Gets or sets the unique identifier of the updating sale.
     /// </summary>
-    /// <value>A GUID that uniquely identifies the get sale in the system.</value>
+    /// <value>A GUID that uniquely identifies the updated sale in the system.</value>
     public Guid Id { get; set; }
 
     /// <summary>
@@ -26,20 +26,10 @@ public class GetSaleResult
     public DateTime Date { get; set; }
 
     /// <summary>
-    /// Gets or sets the ID of the customer
-    /// </summary>
-    public string CustomerId { get; set; } = string.Empty;
-    
-    /// <summary>
     /// Gets or sets the customer name.
     /// </summary>
     public string CustomerName { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Gets or sets the ID of the branch
-    /// </summary>
-    public string BranchId { get; set; } = string.Empty;
-    
     /// <summary>
     /// Gets or sets the branch name.
     /// </summary>
@@ -53,5 +43,5 @@ public class GetSaleResult
     /// <summary>
     /// Gets or sets the list of items included in the sale.
     /// </summary>
-    public List<GetSaleItemResult> Items { get; set; } = [];
+    public List<UpdateSaleItemResult> Items { get; set; } = [];
 }

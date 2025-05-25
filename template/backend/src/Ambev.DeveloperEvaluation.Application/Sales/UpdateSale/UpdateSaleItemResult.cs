@@ -1,15 +1,10 @@
-namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale;
+namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale;
 
 /// <summary>
 /// Represents the result of a single item included in a sale item.
 /// </summary>
-public class GetSaleItemResult
+public class UpdateSaleItemResult
 {
-    /// <summary>
-    /// Gets or sets the product ID being sold.
-    /// </summary>
-    public Guid ProductId { get; set; }
-    
     /// <summary>
     /// Gets or sets the product name.
     /// </summary>

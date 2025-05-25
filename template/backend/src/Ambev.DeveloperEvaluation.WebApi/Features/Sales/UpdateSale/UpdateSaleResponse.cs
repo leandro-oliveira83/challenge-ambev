@@ -1,12 +1,12 @@
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.UpdateSale;
 
 /// <summary>
-/// API response model for the GetSale operation.
+/// API response model for the UpdateSale operation.
 /// </summary>
-public class GetSaleResponse
+public class UpdateSaleResponse
 {
     /// <summary>
-    /// The unique identifier of the sale.
+    /// The unique identifier of the updated sale.
     /// </summary>
     public Guid Id { get; set; }
 
@@ -21,20 +21,10 @@ public class GetSaleResponse
     public DateTime Date { get; set; }
 
     /// <summary>
-    /// The id of the customer who made the purchase.
-    /// </summary>
-    public string CustomerId { get; set; } = string.Empty;
-    
-    /// <summary>
     /// The name of the customer who made the purchase.
     /// </summary>
     public string CustomerName { get; set; } = string.Empty;
 
-    /// <summary>
-    /// The id of the branch where the sale was made
-    /// </summary>
-    public string BranchId { get; set; } = string.Empty;
-    
     /// <summary>
     /// The name of the branch where the sale was made.
     /// </summary>
@@ -48,5 +38,5 @@ public class GetSaleResponse
     /// <summary>
     /// The list of items included in the sale.
     /// </summary>
-    public List<GetSaleItemResponse> Items { get; set; } = [];
+    public List<UpdateSaleItemResponse> Items { get; set; } = [];
 }

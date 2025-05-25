@@ -1,9 +1,9 @@
 namespace Ambev.DeveloperEvaluation.Domain.Events;
 
 /// <summary>
-/// Domain event triggered when a sale is created.
+/// Domain event triggered when a sale is updated.
 /// </summary>
-public record SaleCreatedEvent(Guid SaleId, string SaleNumber, decimal TotalAmount) : IDomainEvent
+public record SaleModifiedEvent(Guid SaleId, string SaleNumber, decimal TotalAmount) : IDomainEvent
 {
     /// <summary>
     /// Timestamp indicating when the event occurred.

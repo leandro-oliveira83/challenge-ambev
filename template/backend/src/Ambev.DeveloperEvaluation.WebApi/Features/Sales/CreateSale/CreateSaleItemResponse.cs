@@ -1,7 +1,7 @@
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 
 /// <summary>
-/// API model representing an item in the sale response.
+/// API model representing an item in the sale item response.
 /// </summary>
 public class CreateSaleItemResponse
 {

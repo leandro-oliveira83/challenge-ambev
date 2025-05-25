@@ -1,15 +1,10 @@
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.UpdateSale;
 
 /// <summary>
-/// API model representing an item in the sale response.
+/// API model representing an item in the sale item response.
 /// </summary>
-public class GetSaleItemResponse
+public class UpdateSaleItemResponse
 {
-    /// <summary>
-    /// Gets or sets the product ID being sold.
-    /// </summary>
-    public Guid ProductId { get; set; }
-    
     /// <summary>
     /// The product name associated with this item.
     /// </summary>

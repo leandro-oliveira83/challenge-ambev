@@ -17,6 +17,14 @@ public interface ISaleRepository
     Task<Sale> CreateAsync(Sale sale, CancellationToken cancellationToken = default);
     
     /// <summary>
+    /// Updates an existing sale in the repository
+    /// </summary>
+    /// <param name="sale">The sale to update</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The updated sale</returns>
+    Task<Sale> UpdateAsync(Sale sale, CancellationToken cancellationToken = default);
+    
+    /// <summary>
     /// Retrieves a sale by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the sale</param>
