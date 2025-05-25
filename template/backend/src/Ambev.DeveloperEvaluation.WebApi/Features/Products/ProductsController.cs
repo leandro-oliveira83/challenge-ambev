@@ -134,16 +134,16 @@ public class ProductsController : BaseController
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Paginated list of products</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(PaginatedResponse<ProductResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(PaginatedResponse<GetAllProductResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductRequest request, CancellationToken cancellationToken)
     {
         var command = _mapper.Map<GetAllProductCommand>(request);
         var response = await _mediator.Send(command, cancellationToken);
-        var items = _mapper.Map<ICollection<ProductResponse>>(response.Items);
+        var items = _mapper.Map<ICollection<GetAllProductResponse>>(response.Items);
 
-        return OkPaginated<ProductResponse>(
+        return OkPaginated<GetAllProductResponse>(
             new(
                 items, 
                 response.TotalItems, 

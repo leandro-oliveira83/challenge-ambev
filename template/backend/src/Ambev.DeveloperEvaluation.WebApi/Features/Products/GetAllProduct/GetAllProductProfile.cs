@@ -12,6 +12,6 @@ public class GetAllProductProfile : Profile
     public GetAllProductProfile()
     {
         CreateMap<GetAllProductRequest, GetAllProductCommand>();
-        CreateMap<ProductResult, ProductResponse>();
+        CreateMap<ProductResult, GetAllProductResponse>();
     }
 }
