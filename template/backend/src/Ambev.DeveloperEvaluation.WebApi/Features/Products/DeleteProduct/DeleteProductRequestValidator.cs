@@ -3,7 +3,7 @@ using FluentValidation;
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct;
 
 /// <summary>
-/// Validator for DeleteUserRequest
+/// Validator for DeleteProductRequest
 /// </summary>
 public class DeleteProductRequestValidator: AbstractValidator<DeleteProductRequest>
 {

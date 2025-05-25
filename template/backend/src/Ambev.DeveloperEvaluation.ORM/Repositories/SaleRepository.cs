@@ -47,6 +47,23 @@ public class SaleRepository: ISaleRepository
     }
     
     /// <summary>
+    /// Deletes a sale from the database
+    /// </summary>
+    /// <param name="id">The unique identifier of the sale to delete</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>True if the sale was deleted, false if not found</returns>
+    public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var sale = await GetByIdAsync(id, cancellationToken);
+        if (sale == null)
+            return false;
+
+        _context.Sales.Remove(sale);
+        await _context.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+    
+    /// <summary>
     /// Retrieves a sale by their unique identifier
     /// </summary>
     /// <param name="id">The unique identifier of the sale</param>

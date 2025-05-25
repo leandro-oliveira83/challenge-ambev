@@ -1,7 +1,7 @@
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct;
 
 /// <summary>
-/// Request model for deleting a prodiuct
+/// Request model for deleting a product
 /// </summary>
 public class DeleteProductRequest
 {
