@@ -15,7 +15,7 @@ public class DeleteProductHandler: IRequestHandler<DeleteProductCommand, DeleteP
     /// Initializes a new instance of DeleteProductHandler
     /// </summary>
     /// <param name="productRepository">The product repository</param>
-    /// <param name="validator">The validator for DeleteUserCommand</param>
+    /// <param name="validator">The validator for DeleteProductCommand</param>
     public DeleteProductHandler(
         IProductRepository productRepository)
     {
@@ -25,7 +25,7 @@ public class DeleteProductHandler: IRequestHandler<DeleteProductCommand, DeleteP
     /// <summary>
     /// Handles the DeleteProductCommand request
     /// </summary>
-    /// <param name="request">The DeleteProduct command</param>
+    /// <param name="request">The DeleteSale command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The result of the delete operation</returns>
     public async Task<DeleteProductResponse> Handle(DeleteProductCommand request, CancellationToken cancellationToken)

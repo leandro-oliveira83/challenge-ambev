@@ -8,7 +8,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct;
 public class DeleteProductProfile : Profile
 {
     /// <summary>
-    /// Initializes the mappings for DeleteProduct feature
+    /// Initializes the mappings for DeleteSale feature
     /// </summary>
     public DeleteProductProfile()
     {

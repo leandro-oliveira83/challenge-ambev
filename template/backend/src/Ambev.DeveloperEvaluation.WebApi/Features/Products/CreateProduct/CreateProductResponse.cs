@@ -3,7 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.ValueObjects;
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 
 /// <summary>
-/// API response model for CreateProduct operation
+/// API response model for CreateSale operation
 /// </summary>
 public class CreateProductResponse
 {

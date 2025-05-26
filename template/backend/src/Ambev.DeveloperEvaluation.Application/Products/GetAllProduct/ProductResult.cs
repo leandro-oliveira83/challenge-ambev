@@ -1,6 +1,6 @@
 using Ambev.DeveloperEvaluation.Domain.ValueObjects;
 
-namespace Ambev.DeveloperEvaluation.Application.Products;
+namespace Ambev.DeveloperEvaluation.Application.Products.GetAllProduct;
 
 /// <summary>
 /// Response model for ListProduct operations
