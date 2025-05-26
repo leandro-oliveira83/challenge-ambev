@@ -54,7 +54,7 @@ public class Sale : BaseEntity
     /// <summary>
     /// Gets the total amount for the sale.
     /// </summary>
-    public decimal TotalAmount => Items.Sum(item => item.Total);
+    public decimal TotalAmount => Items.Where(i => !i.IsCancelled).Sum(item => item.Total);
 
     /// <summary>
     /// Gets the creation timestamp.
