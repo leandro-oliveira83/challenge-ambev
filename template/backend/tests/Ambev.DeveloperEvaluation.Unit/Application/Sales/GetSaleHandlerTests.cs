@@ -29,6 +29,9 @@ public class GetSaleHandlerTests
         _handler = new GetSaleHandler(_saleRepository, _mapper);
     }
 
+    /// <summary>
+    /// Ensures that a validation exception is thrown when the command has an invalid ID.
+    /// </summary>
     [Fact(DisplayName = "Given invalid command Then should throw validation exception")]
     public async Task Handle_InvalidCommand_ShouldThrowValidationException()
     {
@@ -42,6 +45,9 @@ public class GetSaleHandlerTests
         await act.Should().ThrowAsync<ValidationException>();
     }
 
+    /// <summary>
+    /// Ensures that a key not found exception is thrown when the sale does not exist in the repository.
+    /// </summary>
     [Fact(DisplayName = "Given non-existing sale Then should throw not found exception")]
     public async Task Handle_SaleNotFound_ShouldThrowNotFoundException()
     {
@@ -59,6 +65,9 @@ public class GetSaleHandlerTests
             .WithMessage($"Sale with ID {id} not found");
     }
 
+    /// <summary>
+    /// Verifies that a valid request returns the expected mapped sale result.
+    /// </summary>
     [Fact(DisplayName = "Given valid command Then should return sale result")]
     public async Task Handle_ValidCommand_ShouldReturnMappedResult()
     {

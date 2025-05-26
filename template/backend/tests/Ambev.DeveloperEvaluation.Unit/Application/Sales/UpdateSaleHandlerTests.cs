@@ -37,6 +37,9 @@ public class UpdateSaleHandlerTests
         _handler = new UpdateSaleHandler(_saleRepository, _productRepository, _mapper, _publisher);
     }
     
+    /// <summary>
+    /// Ensures that a validation exception is thrown when the command is invalid (e.g., missing required fields).
+    /// </summary>
     [Fact(DisplayName = "Given invalid command Then should throw validation error")]
     public async Task Handle_InvalidCommand_ShouldThrowValidation()
     {
@@ -45,6 +48,9 @@ public class UpdateSaleHandlerTests
         await act.Should().ThrowAsync<ValidationException>();
     }
     
+    /// <summary>
+    /// Ensures that a key not found exception is thrown when the specified sale ID does not exist in the repository.
+    /// </summary>
     [Fact(DisplayName = "Given non-existing sale Then should throw not found")]
     public async Task Handle_SaleNotFound_ShouldThrow()
     {
@@ -55,6 +61,9 @@ public class UpdateSaleHandlerTests
         await act.Should().ThrowAsync<KeyNotFoundException>();
     }
     
+    /// <summary>
+    /// Ensures that a validation exception is thrown when an item references a non-existent product.
+    /// </summary>
     [Fact(DisplayName = "Given item with non-existing product Then should throw validation error")]
     public async Task Handle_ProductNotFound_ShouldThrow()
     {
@@ -68,6 +77,9 @@ public class UpdateSaleHandlerTests
         await act.Should().ThrowAsync<ValidationException>();
     }
     
+    /// <summary>
+    /// Verifies that when a valid update is received, the sale is updated and appropriate domain events are published.
+    /// </summary>
     [Fact(DisplayName = "Given valid update Then should update sale and publish events")]
     public async Task Handle_ValidUpdate_ShouldUpdateSaleAndPublishEvents()
     {
@@ -94,6 +106,9 @@ public class UpdateSaleHandlerTests
         await _publisher.Received(1).PublishAsync(Arg.Any<SaleModifiedEvent>(), Arg.Any<CancellationToken>());
     }
     
+    /// <summary>
+    /// Ensures that when items are removed in the update request, they are marked as cancelled and events are published.
+    /// </summary>
     [Fact(DisplayName = "Given removed items in update Then should mark them as cancelled")]
     public async Task Handle_RemovedItems_ShouldMarkAsCancelledAndPublish()
     {

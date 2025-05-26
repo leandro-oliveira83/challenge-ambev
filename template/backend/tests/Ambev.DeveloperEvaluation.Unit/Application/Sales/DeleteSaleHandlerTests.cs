@@ -29,6 +29,9 @@ public class DeleteSaleHandlerTests
         _handler = new DeleteSaleHandler(_saleRepository, _publisher);
     }
     
+    /// <summary>
+    /// Ensures that a validation exception is thrown when the DeleteSaleCommand is invalid (e.g., empty ID).
+    /// </summary>
     [Fact(DisplayName = "Given invalid command Then should throw validation exception")]
     public async Task Handle_InvalidCommand_ShouldThrowValidationException()
     {
@@ -42,6 +45,9 @@ public class DeleteSaleHandlerTests
         await act.Should().ThrowAsync<ValidationException>();
     }
     
+    /// <summary>
+    /// Ensures that a KeyNotFoundException is thrown when attempting to delete a sale that does not exist.
+    /// </summary>
     [Fact(DisplayName = "Given valid command but sale not found Then should throw not found exception")]
     public async Task Handle_SaleNotFound_ShouldThrowKeyNotFoundException()
     {
@@ -59,6 +65,9 @@ public class DeleteSaleHandlerTests
             .WithMessage($"Sale with ID {command.Id} not found");
     }
     
+    /// <summary>
+    /// Verifies that a valid sale deletion returns a success response and publishes the SaleDeletedEvent.
+    /// </summary>
     [Fact(DisplayName = "Given valid command Then should return success and publish event")]
     public async Task Handle_ValidCommand_ShouldReturnSuccessAndPublishEvent()
     {

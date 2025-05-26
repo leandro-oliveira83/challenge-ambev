@@ -37,6 +37,9 @@ public class CreateSaleHandlerTests
         _handler = new CreateSaleHandler(_saleRepository, _productRepository, _mapper, _publisher);
     }
 
+    /// <summary>
+    /// Ensures that a validation exception is thrown when the command is invalid (e.g., missing required fields).
+    /// </summary>
     [Fact(DisplayName = "Given invalid command Then validation should fail")]
     public async Task Handle_InvalidCommand_ShouldThrowValidationException()
     {
@@ -50,6 +53,9 @@ public class CreateSaleHandlerTests
         await act.Should().ThrowAsync<ValidationException>();
     }
 
+    /// <summary>
+    /// Ensures that a validation exception is thrown when attempting to create a sale with a product that does not exist.
+    /// </summary>
     [Fact(DisplayName = "Given a non-existing product Then should throw validation error")]
     public async Task Handle_NonExistingProduct_ShouldThrowValidationException()
     {
@@ -66,6 +72,9 @@ public class CreateSaleHandlerTests
             .WithMessage("*does not exist*");
     }
 
+    /// <summary>
+    /// Ensures that a validation exception is thrown when trying to add more than 20 units of a single product to a sale.
+    /// </summary>
     [Fact(DisplayName = "Given product with invalid quantity Then should throw validation error")]
     public async Task Handle_TooManyItems_ShouldThrowValidationException()
     {
@@ -83,6 +92,9 @@ public class CreateSaleHandlerTests
             .WithMessage("*more than 20 identical items*");
     }
 
+    /// <summary>
+    /// Verifies that a valid sale is successfully created and a SaleCreated event is published.
+    /// </summary>
     [Fact(DisplayName = "Given valid sale data Then should return success and publish event")]
     public async Task Handle_ValidRequest_ShouldReturnSuccessAndPublishEvent()
     {
@@ -113,6 +125,9 @@ public class CreateSaleHandlerTests
         await _publisher.Received(1).PublishAsync(Arg.Any<SaleCreatedEvent>(), Arg.Any<CancellationToken>());
     }
     
+    /// <summary>
+    /// Ensures that no discount is applied when quantity is less than 4.
+    /// </summary>
     [Fact(DisplayName = "Given quantity less than 4 Then no discount should be applied")]
     public async Task Handle_QuantityLessThan4_ShouldApplyNoDiscount()
     {
@@ -136,6 +151,9 @@ public class CreateSaleHandlerTests
         item.Discount.Should().Be(0m);
     }
     
+    /// <summary>
+    /// Ensures that a 10% discount is applied when quantity is between 4 and 9.
+    /// </summary>
     [Fact(DisplayName = "Given quantity between 4 and 9 Then 10 percent discount should be applied")]
     public async Task Handle_QuantityBetween4And9_ShouldApply10PercentDiscount()
     {
@@ -159,6 +177,9 @@ public class CreateSaleHandlerTests
         item.Discount.Should().Be(0.10m);
     }
     
+    /// <summary>
+    /// Ensures that a 20% discount is applied when quantity is between 10 and 20.
+    /// </summary>
     [Fact(DisplayName = "Given quantity between 10 and 20 Then 20 percent discount should be applied")]
     public async Task Handle_QuantityBetween10And20_ShouldApply20PercentDiscount()
     {
@@ -182,6 +203,9 @@ public class CreateSaleHandlerTests
         item.Discount.Should().Be(0.20m);
     }
     
+    /// <summary>
+    /// Ensures that the total amount of the sale is calculated correctly considering discount rules.
+    /// </summary>
     [Fact(DisplayName = "When creating sale Then total amount should be calculated correctly")]
     public async Task Handle_ShouldCalculateTotalCorrectly()
     {

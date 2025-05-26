@@ -27,6 +27,9 @@ public class CancelSaleHandlerTests
         _handler = new CancelSaleHandler(_saleRepository, _publisher);
     }
 
+    /// <summary>
+    /// Ensures that a validation exception is thrown when an invalid CancelSaleCommand is provided.
+    /// </summary>
     [Fact(DisplayName = "Given invalid cancel command Then should throw validation exception")]
     public async Task Handle_InvalidCommand_ShouldThrowValidationException()
     {
@@ -40,6 +43,9 @@ public class CancelSaleHandlerTests
         await act.Should().ThrowAsync<ValidationException>();
     }
     
+    /// <summary>
+    /// Ensures that a KeyNotFoundException is thrown when the specified sale ID does not exist.
+    /// </summary>
     [Fact(DisplayName = "Given nonexistent sale ID Then should throw key not found exception")]
     public async Task Handle_SaleNotFound_ShouldThrowKeyNotFoundException()
     {
@@ -56,6 +62,9 @@ public class CancelSaleHandlerTests
             .WithMessage($"Sale with ID {id} not found");
     }
     
+    /// <summary>
+    /// Verifies that a valid cancel request properly cancels the sale and publishes a SaleCancelledEvent.
+    /// </summary>
     [Fact(DisplayName = "Given valid cancel request Then should cancel sale and publish event")]
     public async Task Handle_ValidRequest_ShouldCancelSaleAndPublishEvent()
     {

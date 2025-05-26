@@ -29,6 +29,9 @@ public class GetAllSaleHandlerTests
         _handler = new GetAllSaleHandler(_saleRepository, _mapper);
     }
     
+    /// <summary>
+    /// Verifies that a valid request returns a paginated list of sales when sales exist in the repository.
+    /// </summary>
     [Fact(DisplayName = "Given valid request When sales exist Then should return paginated result")]
     public async Task Handle_WithValidRequest_ShouldReturnPaginatedSales()
     {
@@ -67,6 +70,9 @@ public class GetAllSaleHandlerTests
         result.TotalItems.Should().Be(2);
     }
     
+    /// <summary>
+    /// Ensures that the handler returns an empty result when no sales are found in the repository.
+    /// </summary>
     [Fact(DisplayName = "Given empty result When no sales found Then should return empty result")]
     public async Task Handle_WhenNoSales_ShouldReturnEmpty()
     {
