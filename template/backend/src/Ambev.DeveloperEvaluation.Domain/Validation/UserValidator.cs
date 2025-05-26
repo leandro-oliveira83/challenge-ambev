@@ -23,10 +23,10 @@ public class UserValidator : AbstractValidator<User>
         
         RuleFor(user => user.Status)
             .NotEqual(UserStatus.Unknown)
-            .WithMessage("User status cannot be Unknown.");
+            .WithMessage("Users status cannot be Unknown.");
         
         RuleFor(user => user.Role)
             .NotEqual(UserRole.None)
-            .WithMessage("User role cannot be None.");
+            .WithMessage("Users role cannot be None.");
     }
 }
