@@ -24,6 +24,10 @@ public class CreateSaleHandlerTests
     private readonly IEventPublisher _publisher;
     private readonly CreateSaleHandler _handler;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CreateSaleHandlerTests"/> class.
+    /// Sets up the test dependencies and creates fake data generators.
+    /// </summary>
     public CreateSaleHandlerTests()
     {
         _saleRepository = Substitute.For<ISaleRepository>();
