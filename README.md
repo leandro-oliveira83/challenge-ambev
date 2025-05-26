@@ -1,86 +1,170 @@
-# Developer Evaluation Project
+# 🧪 Developer Evaluation Project - AMBEV
 
-`READ CAREFULLY`
+Welcome to the Developer Evaluation Challenge. This project implements a complete Sales API with full CRUD operations, following DDD (Domain-Driven Design) principles and respecting specific business rules.
 
-## Instructions
-**The test below will have up to 7 calendar days to be delivered from the date of receipt of this manual.**
+---
 
-- The code must be versioned in a public Github repository and a link must be sent for evaluation once completed
-- Upload this template to your repository and start working from it
-- Read the instructions carefully and make sure all requirements are being addressed
-- The repository must provide instructions on how to configure, execute and test the project
-- Documentation and overall organization will also be taken into consideration
+## 📋 Instructions
 
-## Use Case
-**You are a developer on the DeveloperStore team. Now we need to implement the API prototypes.**
+- You have **7 calendar days** from the receipt of this challenge to deliver the solution.
+- The code must be versioned in a **public GitHub repository**.
+- Please upload this template to your repository and work from it.
+- Make sure all requirements are implemented before submission.
+- This `README` includes instructions on how to **configure**, **run**, and **test** the project.
+- Code quality, organization and documentation are part of the evaluation criteria.
 
-As we work with `DDD`, to reference entities from other domains, we use the `External Identities` pattern with denormalization of entity descriptions.
+---
 
-Therefore, you will write an API (complete CRUD) that handles sales records. The API needs to be able to inform:
+## 🚀 Use Case
 
-* Sale number
-* Date when the sale was made
-* Customer
-* Total sale amount
-* Branch where the sale was made
-* Products
-* Quantities
-* Unit prices
-* Discounts
-* Total amount for each item
-* Cancelled/Not Cancelled
+You are a developer on the **DeveloperStore** team. Your mission is to implement an API to manage **Sales Records**, supporting full **CRUD operations** with the following data:
 
-It's not mandatory, but it would be a differential to build code for publishing events of:
-* SaleCreated
-* SaleModified
-* SaleCancelled
-* ItemCancelled
+### 📦 Sale Details
 
-If you write the code, **it's not required** to actually publish to any Message Broker. You can log a message in the application log or however you find most convenient.
+- Sale Number
+- Sale Date
+- Customer
+- Total Amount
+- Branch
+- Products:
+   - Quantity
+   - Unit Price
+   - Discount
+   - Total per Item
+   - Cancelled / Not Cancelled
 
-### Business Rules
+Additionally, it’s a plus to **log domain events** such as:
 
-* Purchases above 4 identical items have a 10% discount
-* Purchases between 10 and 20 identical items have a 20% discount
-* It's not possible to sell above 20 identical items
-* Purchases below 4 items cannot have a discount
+- `SaleCreated`
+- `SaleModified`
+- `SaleCancelled`
+- `ItemCancelled`
 
-These business rules define quantity-based discounting tiers and limitations:
+No actual message broker is required — logging to console or file is acceptable.
 
-1. Discount Tiers:
-   - 4+ items: 10% discount
-   - 10-20 items: 20% discount
+---
 
-2. Restrictions:
-   - Maximum limit: 20 items per product
-   - No discounts allowed for quantities below 4 items
+## 📏 Business Rules
 
-## Overview
-This section provides a high-level overview of the project and the various skills and competencies it aims to assess for developer candidates. 
+These rules apply to **discounts by quantity per product**:
 
-See [Overview](/.doc/overview.md)
+| Quantity Range       | Discount |
+|----------------------|----------|
+| 1 - 3 items          | ❌ No discount |
+| 4 - 9 items          | ✅ 10%     |
+| 10 - 20 items        | ✅ 20%     |
+| Above 20 items       | ❌ Not allowed |
 
-## Tech Stack
-This section lists the key technologies used in the project, including the backend, testing, frontend, and database components. 
+> ❗ Sales with more than 20 identical items must be **rejected**.
 
-See [Tech Stack](/.doc/tech-stack.md)
+---
 
-## Frameworks
-This section outlines the frameworks and libraries that are leveraged in the project to enhance development productivity and maintainability. 
+## 🛠️ Tech Stack
 
-See [Frameworks](/.doc/frameworks.md)
+| Layer         | Technology                                   |
+|---------------|----------------------------------------------|
+| Language      | C# (.NET 8)                                  |
+| Architecture  | Clean Architecture + DDD                     |
+| API           | ASP.NET Core Web API                         |
+| Persistence   | Entity Framework Core (In-Memory or Postgres) |
+| Testing       | xUnit                                        |
+| Logging       | Serilog (Console/File)                       |
 
-<!-- 
-## API Structure
-This section includes links to the detailed documentation for the different API resources:
-- [API General](./docs/general-api.md)
-- [Products API](/.doc/products-api.md)
-- [Carts API](/.doc/carts-api.md)
-- [Users API](/.doc/users-api.md)
-- [Auth API](/.doc/auth-api.md)
--->
+---
 
-## Project Structure
-This section describes the overall structure and organization of the project files and directories. 
+## 📂 Project Structure
 
-See [Project Structure](/.doc/project-structure.md)
+```
+src/
+├── DeveloperStore.Api           # Entry point (Web API)
+├── DeveloperStore.Application   # Use Cases, DTOs, Interfaces
+├── DeveloperStore.Domain        # Entities, Value Objects, Domain Events
+├── DeveloperStore.Infrastructure# EF, Repositories, Mappings
+└── DeveloperStore.Tests         # Unit and Integration Tests
+```
+
+---
+
+## ⚙️ How to Run
+
+### 📌 Prerequisites
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- [Git](https://git-scm.com/)
+
+### ▶️ Run the project
+
+```bash
+# Clone the repo
+git clone https://github.com/leandro-oliveira83/challenge-ambev.git
+cd challenge-ambev
+
+# Restore dependencies
+dotnet restore
+
+# Run the API
+dotnet run --project src/Ambev.DeveloperEvaluation.WebApi
+```
+
+API should now be available at: `http://localhost:5119/swagger/index.html`.
+
+---
+
+## 🧪 Running Tests
+
+```bash
+dotnet test
+```
+
+---
+
+## 📌 Observations
+
+- This solution uses **GitFlow** to manage development lifecycle.
+- Commit messages follow **Conventional Commits** for readability and automation.
+- Domain events are logged when actions are performed (e.g., `SaleCreated`).
+
+---
+
+## 📞 Contact
+
+If you have any questions about the implementation or reasoning behind design decisions, feel free to reach out through GitHub.
+
+---
+
+
+---
+
+## 🗄️ Running Migrations
+
+### 🔧 Step 1: Configure Connection String
+
+Update the connection string in the `appsettings.json` file of the **Application** project:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=DeveloperStoreDb;User Id=your_user;Password=your_password;"
+  }
+}
+```
+
+Make sure the database and credentials are correct and accessible.
+
+### ▶️ Step 2: Run Migrations
+
+To add or apply EF Core migrations, use the following command pattern **from the solution root**:
+
+```bash
+dotnet ef migrations add InitialCreate --project src/DeveloperStore.Infrastructure --startup-project src/DeveloperStore.Api --context SalesDbContext
+```
+
+To apply migrations to the database:
+
+```bash
+dotnet ef database update --project src/DeveloperStore.Infrastructure --startup-project src/DeveloperStore.Api --context SalesDbContext
+```
+
+> These commands ensure EF Core can locate both the DbContext (in `Infrastructure`) and the app entry point (in `Api`).
+
+---
